@@ -22,8 +22,8 @@ class Garage:
             for index, i in enumerate(self.cars_added):        
                 self.car_info['code'].append(self.identifier[index])
                 self.car_info['license plate'].append(i[0])
-                self.car_info['Model'].append(i[1])
-                self.car_info['Color'].append(i[2])
+                self.car_info['model'].append(i[1])
+                self.car_info['color'].append(i[2])
             return "car successfully added to the parking lot"    
         else:            
           print(f"We have {self.spots} spots available. I am sorry")
@@ -32,24 +32,32 @@ class Garage:
         past_len = len(self.car_info['code'])
         
         if given_code not in self.car_info['code']:
-            print("We could not find your car. Are you sure you"
+            print("We could not find your car. Are you sure you "
                   "parked your car here? ")
         else:    
-            for index, value in enumerate(self.car_info['code']):
-                if value == given_code:                    
+            for index, i in enumerate(self.car_info['code']):
+                if i == given_code:                    
                     print("Your car's license plate is:",
                           self.car_info['license plate'][index])
                     print("Your car's model is:",
-                           self.car_info['Model'][index])
+                           self.car_info['model'][index])
                     print("Your car's color is :",
-                           self.car_info['Color'][index])
+                           self.car_info['color'][index])
                     
-                    removed_car_index = self.car_info['code'].pop(index)
+                    removed_car_index = self.car_info['code'].pop(index)            
                     self.car_info['license plate'].pop(index)
-                    self.car_info['Model'].pop(index)
-                    self.car_info['Color'].pop(index)                      
+                    self.car_info['model'].pop(index)
+                    self.car_info['color'].pop(index)   
+
+                    # print("nie usuwa car A1, tylko listuje)")
+                    # self.car_info['code'].pop(removed_car_index)
+                    # self.car_info['license plate'].pop(i[0])
+                    # self.car_info['model'].pop(i[1])
+                    # self.car_info['color'].pop(i[2])    
+
                     self.spots += 1
-       
+                                      
+                           
         if len(self.car_info['code']) < past_len:
             while True:              
                 if bill_hours.isnumeric():                   
@@ -57,10 +65,10 @@ class Garage:
                                              removed_car_index]
                     break                         
                 else:                    
-                  print("Your input must be an integer. Sample"
+                  print("Your input must be an integer. Sample "
                         "input: 5 ")           
-                bill_hours = input("Enter for how long you were on"
-                                   "the parking lot in hours or 'q'"
+                bill_hours = input("Enter for how long you were on "
+                                   "the parking lot in hours or 'q' "
                                 " to quit. Example input: 5  -->  ")
                          
                 if bill_hours in ['q', 'Q']:                 
@@ -71,7 +79,9 @@ class Garage:
             else:                
                 self.bill = int(list_of_time_and_code[0]) * 5 + 100
                 return f'Your total bill is ${self.bill}'
+        return self.car_info    
    
     def cars_in_garage(self):
         for i in self.car_info.items():                
             print(i)
+        return self.car_info
